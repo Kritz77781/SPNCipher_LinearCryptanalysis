@@ -121,6 +121,7 @@ U_{4,6} ⊕ U_{4,8} ⊕ U_{4,14} ⊕ U_{4,16} ⊕ P_{5} ⊕ P_{7} ⊕ P_{8} ⊕ 
  - The cipher takes 16-bit block as input and has 4 rounds, each consisting of substitution, transposition and key mixing
  - Running this file will encrypt 10,000 incremental values using a random key 
  - The ciphertexts are written to file in the 'testData' directory in CSV format
+ - create a folder under base directory with command `$ mkdir testData`
 - `$ python .\basic_SPN.py`
 
 ### linear_crptanalysis.py
