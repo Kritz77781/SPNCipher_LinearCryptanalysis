@@ -8,18 +8,16 @@ from math import trunc, fabs
 import itertools as it
 import collections
 
-# Build table of input values
+# Build tables of input and output values
 sBox_input = ["".join(seq) for seq in it.product("01", repeat=4)]
-# Build a table of output values
 sBox_output = [ bin(cipher.sBox[int(seq,2)])[2:].zfill(4) for seq in sBox_input ]
 # Build an ordered dictionary between input and output values
 sBox_b = collections.OrderedDict(zip(sBox_input,sBox_output))
 # Initialise the Linear Approximation Table (LAT)
 probabilityBias = [[0 for x in range(len(sBox_b))] for y in range(len(sBox_b))] 
 
-# A complete enumeration of all the linear approximations of the simple SPN
-# cipher S-Box. Dividing an element value by 16 gives the probability bias 
-# for the particular linear combination of input and output bits.
+# A complete enumeration of all the linear approximations of the SPN cipher S-Box. 
+# Dividing an element value by 16 gives the probability bias for the particular linear combination of input and output bits.
 print('Linear Approximation Table for SPN cipher\'s sBox: ')
 print('(x-axis: output equation - 8; y-axis: input equation - 8)')
 for bits in sBox_b.items():
@@ -37,7 +35,7 @@ for bits in sBox_b.items():
         for y_idx in range (0, len(equations_out)):
             probabilityBias[x_idx][y_idx] += (equations_in[x_idx]==equations_out[y_idx])
 
-# Print the linear approximation table
+# Print the linear approximation table (LAT)
 for bias in probabilityBias:
     for bia in bias:
         #trunc(((bia/16.0)-0.5)*16.0)
