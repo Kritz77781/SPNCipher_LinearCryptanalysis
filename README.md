@@ -132,5 +132,9 @@ U_{4,6} ⊕ U_{4,8} ⊕ U_{4,14} ⊕ U_{4,16} ⊕ P_{5} ⊕ P_{7} ⊕ P_{8} ⊕ 
 
 ## References
 - [A tutorial on linear and differential cryptanalysis] - ioactive. (n.d.). Retrieved November 26, 2021, from https://ioactive.com/wp-content/uploads/2015/07/ldc_tutorial.pdf. 
+- Hkscy. (n.d.). [HKSCY/basic-SPN-cryptanalysis: A basic SPN cryptanalysis]. GitHub. Retrieved November 26, 2021, from https://github.com/hkscy/Basic-SPN-cryptanalysis.
+- [Lightweight encryption algorithm containing SPN structure] ... (n.d.). Retrieved November 26, 2021, from https://www.researchgate.net/publication/338358527_Lightweight_Encryption_Algorithm_Containing_SPN_Structure_for_IoT.  
+- [Lightweight block ciphers for IOT] ... - ripublication.com. (n.d.). Retrieved November 26, 2021, from https://www.ripublication.com/ijaer18/ijaerv13n5_26.pdf. 
+- [Differential cryptanalysis for a 3-round SPN] - emo.org.tr. (n.d.). Retrieved November 26, 2021, from https://www.emo.org.tr/ekler/a183ba81b8f82c9_ek.pdf. 
 
 
