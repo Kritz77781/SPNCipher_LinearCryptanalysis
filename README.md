@@ -131,6 +131,6 @@ U_{4,6} ⊕ U_{4,8} ⊕ U_{4,14} ⊕ U_{4,16} ⊕ P_{5} ⊕ P_{7} ⊕ P_{8} ⊕ 
 - `$ python .\linear_cryptanalysis.py`
 
 ## References
-- test
+- [A tutorial on linear and differential cryptanalysis] - ioactive. (n.d.). Retrieved November 26, 2021, from https://ioactive.com/wp-content/uploads/2015/07/ldc_tutorial.pdf. 
 
 
