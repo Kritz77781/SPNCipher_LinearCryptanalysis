@@ -1,4 +1,4 @@
-# Basic SPN cipher which takes as input a 16-bit input block and has 4 rounds.
+# Basic SPN cipher which takes a 16-bit block as input and has 4 rounds.
 # Each round consists of (1) substitution (2) transposition (3) key mixing
 
 import random
@@ -7,11 +7,13 @@ import hashlib
 block_size = 16
 verboseState = False
 
-# (1) Substitution: 4x4 bijective, one sBox used for all 4 sub-blocks of size 4. Nibble wise
-sBox =     {0:0xE, 1:0x4, 2:0xD, 3:0x1, 4:0x2, 5:0xF, 6:0xB, 7:0x8, 8:0x3, 9:0xA, 0xA:0x6, 0xB:0xC, 0xC:0x5, 0xD:0x9, 0xE:0x0, 0xF:0x7} #key:value
+# Substitution takes place: 4x4 bijective, one sBox used for all 4 sub-blocks of size 4.
+# Non-linear mapping
+sBox =     {0:0xE, 1:0x4, 2:0xD, 3:0x1, 4:0x2, 5:0xF, 6:0xB, 7:0x8, 8:0x3, 9:0xA, 0xA:0x6, 0xB:0xC, 0xC:0x5, 0xD:0x9, 0xE:0x0, 0xF:0x7} 
 sBox_inverse = {0xE:0, 0x4:1, 0xD:2, 0x1:3, 0x2:4, 0xF:5, 0xB:6, 0x8:7, 0x3:8, 0xA:9, 0x6:0xA, 0xC:0xB, 0x5:0xC, 0x9:0xD, 0x0:0xE, 0x7:0xF}
 
-# Apply sBox (1) to a 16 bit state and return the result
+# Apply sBox to a 16 bit state 
+# Return the result
 def sBox_apply(state, sBox):
     subStates = [state&0x000f, (state&0x00f0)>>4, (state&0x0f00)>>8, (state&0xf000)>>12]
     for idx,subState in enumerate(subStates):
@@ -19,12 +21,13 @@ def sBox_apply(state, sBox):
     return subStates[0]|subStates[1]<<4|subStates[2]<<8|subStates[3]<<12
     
 
-# (2) Permutation. Applied bit-wise
+# Permutation/transposition takes place which is applied in bit-wise manner
+# Output i of S-box j is connected to input j of S-box i
 pBox = {0:0, 1:4, 2:8, 3:12, 4:1, 5:5, 6:9, 7:13, 8:2, 9:6, 10:10, 11:14, 12:3, 13:7, 14:11, 15:15}
 
-# (3) Key mixing: bitwise XOR between round subkey and data block input to round
+# Key mixing occurs by bitwise XOR operation between round subkey and data block input to round
 # Key schedule: independent random round keys.
-# We take the sha-hash of a 128-bit 'random' seed and then take the first 80-bits 
+# Taking the sha-hash of a 128-bit 'random' seed and then take the first 80-bits 
 # of the output as out round keys K1-K5 (Each 16 bits long)
 def keyGeneration():
     k = hashlib.sha1( hex(random.getrandbits(128)).encode('utf-8') ).hexdigest()[2:2+20]
@@ -68,7 +71,7 @@ def encrypt(plaintext, k):
     
     return state
 
-# Simple SPN Cipher decrypt function
+# SPN Cipher decrypt function
 def decrypt(ciphertext, k):
     state = ciphertext
     if verboseState: print('**ciphertext = {:04x}**'.format(state))
@@ -86,7 +89,7 @@ def decrypt(ciphertext, k):
     state = sBox_apply(state,sBox_inverse)
     if verboseState: print (hex(state))
     
-    #Undo first 3 rounds of simple SPN cipher
+    #Undo first 3 rounds of SPN cipher
     for roundN in range(2, -1, -1):
         
         if verboseState: print(roundN, end = ' ')
@@ -94,7 +97,7 @@ def decrypt(ciphertext, k):
         state = state^subKeys[roundN+1]
         if verboseState: print (hex(state), end=' ')
         
-        #Un-permute the state bitwise (2)
+        #Un-permute the state bitwise 
         stateTemp = 0      
         for bit_index in range(0, block_size):
             if(state & (1 << bit_index)):
