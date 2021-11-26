@@ -24,7 +24,7 @@ The permutation part of a round is simply the tranposition of the bits or the pe
 |:-----------|:-:|:-:|:-:|:--:|:-:|:-:|:--:|:--:|:--:|:--:|:--:|:-:|:-:|:--:|:-:|:-:|
 | **output** | 1 | 5 | 9 | 13 | 2 | 6 | 10 | 14 | 3 | 7 | 11 | 15 | 4 | 8 | 12 | 16 | 
 
-![SPN](SPN_Cipher.png)
+![SPN](SPNCipher.png)
 
 ### Key Mixing
 A simple bit-wise exclusive-OR (XOR) between the key bits associated with a round is used to perform key mixing and the data block input to a round. Moreover, a subkey is applied after the last round to ensure that the last layer of substitution cannot be easily avoided by a cryptanalyst that easily works backward through the substitution in the last round. In this cipher, it is assumed that all bits of the subkeys are generated independently and unrelated.
